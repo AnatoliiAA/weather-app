@@ -8,12 +8,12 @@ interface DeleteButtonProps {
 export const DeleteButton = ({ handleDelete }: DeleteButtonProps) => {
   return (
     <IconButton
-      size="small"
+      size="medium"
       aria-label="close"
       color="inherit"
       onClick={handleDelete}
     >
-      <Delete fontSize="small" />
+      <Delete fontSize="medium" />
     </IconButton>
   );
 };

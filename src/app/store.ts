@@ -1,10 +1,11 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import weatherReducer from '../features/weather/weatherSlice';
-
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import weatherReducer from "../features/weather/weatherSlice";
+import weatherForecastReducer from "../features/weather-forecast/weatherForecastSlice";
 
 export const store = configureStore({
   reducer: {
     weather: weatherReducer,
+    weatherForecast: weatherForecastReducer,
   },
 });
 

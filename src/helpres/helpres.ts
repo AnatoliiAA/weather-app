@@ -2,9 +2,17 @@ export const capitalizeFirstLetter = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
 export const setLocalStorageCities = (cityName: string): void => {
-  let allCities = localStorage.getItem("cities");
-  const newCities = allCities === null ? cityName : allCities + "," + cityName;
-  localStorage.setItem("cities", newCities);
+  const cities = localStorage.getItem("cities");
+  if (cities === null) {
+    localStorage.setItem("cities", cityName);
+    return;
+  }
+  const tempArr = cities.split(",");
+  const index = tempArr.indexOf(cityName);
+  if (index === -1) {
+    const newCities = cities + "," + cityName;
+    localStorage.setItem("cities", newCities);
+  }
 };
 
 export const getLocalStorageCities = (): Array<string> => {

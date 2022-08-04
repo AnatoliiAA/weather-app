@@ -1,12 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Grid,
-  Snackbar,
-  styled,
-} from "@mui/material";
+import { Alert, CircularProgress, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   capitalizeFirstLetter,
@@ -23,19 +16,9 @@ import {
   fetchSeveralByName,
   deleteByName,
 } from "./weatherSlice";
-
-const ContentWrapper = styled(Box)(({ theme }) => ({
-  boxSizing: "border-box",
-  maxWidth: "1400px",
-  margin: "0 auto",
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(0, 2, 0, 2),
-})) as typeof Box;
-
-const CenteredGrid = styled(Grid)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-})) as typeof Grid;
+import { ContentWrapper } from "../../components/layout/ContentWrapper";
+import { CenteredGrid } from "../../components/layout/CenteredGrid";
+import { Notification } from "../../components/notification/Notification";
 
 export const Weather = () => {
   const cities = useAppSelector(selectCities);
@@ -72,6 +55,10 @@ export const Weather = () => {
     dispatch(deleteByName(cityName));
   };
 
+  const handleUpdate = (cityName: string) => {
+    dispatch(fetchCityByName(cityName));
+  };
+
   return (
     <ContentWrapper>
       <CenteredGrid container spacing={2}>
@@ -85,36 +72,31 @@ export const Weather = () => {
 
         {Object.keys(cities).map((city) => {
           return (
-            <CenteredGrid item xs={6} md={4} key={cities[city].id}>
+            <CenteredGrid item xs={6} md={3} key={cities[city].id}>
               <WeatherCard
                 title={city}
                 temp={cities[city].temp}
                 handleDelete={() => handleDelete(city)}
+                handleUpdate={() => handleUpdate(city)}
               ></WeatherCard>
             </CenteredGrid>
           );
         })}
 
-        {status === "loading" ? (
+        {status === "loading" && Object.keys(cities).length === 0 ? (
           <CenteredGrid item xs={6} md={4}>
             <CircularProgress />
           </CenteredGrid>
         ) : null}
 
         {status === "failed" ? (
-          <Snackbar
+          <Notification
             open={status === "failed"}
             onClose={handleCloseNotification}
             autoHideDuration={6000}
-          >
-            <Alert
-              onClose={handleCloseNotification}
-              severity="error"
-              sx={{ width: "100%" }}
-            >
-              Failed to load weather for this city
-            </Alert>
-          </Snackbar>
+            severity="error"
+            text="Failed to load weather for this city"
+          />
         ) : null}
       </CenteredGrid>
     </ContentWrapper>
