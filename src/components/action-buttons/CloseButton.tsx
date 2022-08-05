@@ -1,5 +1,5 @@
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface CloseButtonProps {
   handleClose: (e: React.MouseEvent<HTMLButtonElement>) => void;

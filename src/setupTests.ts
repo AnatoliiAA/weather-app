@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom/extend-expect";
+import '@testing-library/jest-dom/extend-expect';
 
 type Store = any;
 
@@ -12,7 +12,7 @@ class LocalStorageMock {
   }
 
   key(n: number): any {
-    if (typeof n === "undefined") {
+    if (typeof n === 'undefined') {
       throw new Error(
         "Uncaught TypeError: Failed to execute 'key' on 'Storage': 1 argument required, but only 0 present."
       );
@@ -34,13 +34,13 @@ class LocalStorageMock {
   }
 
   setItem(key: string, value: any): undefined {
-    if (typeof key === "undefined" && typeof value === "undefined") {
+    if (typeof key === 'undefined' && typeof value === 'undefined') {
       throw new Error(
         "Uncaught TypeError: Failed to execute 'setItem' on 'Storage': 2 arguments required, but only 0 present."
       );
     }
 
-    if (typeof value === "undefined") {
+    if (typeof value === 'undefined') {
       throw new Error(
         "Uncaught TypeError: Failed to execute 'setItem' on 'Storage': 2 arguments required, but only 1 present."
       );
@@ -48,14 +48,14 @@ class LocalStorageMock {
 
     if (!key) return undefined;
 
-    this.store[key] = value.toString() || "";
+    this.store[key] = value.toString() || '';
     this.length = Object.keys(this.store).length;
 
     return undefined;
   }
 
   removeItem(key: string): undefined {
-    if (typeof key === "undefined") {
+    if (typeof key === 'undefined') {
       throw new Error(
         "Uncaught TypeError: Failed to execute 'removeItem' on 'Storage': 1 argument required, but only 0 present."
       );

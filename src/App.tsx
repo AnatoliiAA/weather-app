@@ -1,8 +1,8 @@
-import { Weather } from "./features/weather/Weather";
-import { WeatherForecast } from "./features/weather-forecast/WeatherForecast";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Header } from "./components/header/Header";
-import { CssBaseline } from "@mui/material";
+import { Weather } from './features/weather/Weather';
+import { WeatherForecast } from './features/weather-forecast/WeatherForecast';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Header } from './components/header/Header';
+import { CssBaseline } from '@mui/material';
 
 function App() {
   return (

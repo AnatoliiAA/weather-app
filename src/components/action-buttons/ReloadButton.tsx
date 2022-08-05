@@ -1,15 +1,12 @@
-import { IconButton } from "@mui/material";
-import { Update } from "@mui/icons-material/";
+import { IconButton } from '@mui/material';
+import { Update } from '@mui/icons-material/';
 
 interface UpdateButtonProps {
   handleUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
   dataTestid?: string;
 }
 
-export const UpdateButton = ({
-  handleUpdate,
-  dataTestid,
-}: UpdateButtonProps) => {
+export const UpdateButton = ({ handleUpdate, dataTestid }: UpdateButtonProps) => {
   return (
     <IconButton
       size="medium"

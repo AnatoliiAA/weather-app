@@ -1,8 +1,8 @@
-import { capitalizeFirstLetter } from "../helpres/helpres";
+import { capitalizeFirstLetter } from '../helpres/helpres';
 
-export const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-export const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
-const API_KEY = "1f1c066d9c9d663b87a20095a5d363c8";
+export const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+export const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
+const API_KEY = '1f1c066d9c9d663b87a20095a5d363c8';
 
 export const fetchByName = async (city: string) => {
   try {

@@ -1,15 +1,12 @@
-import { IconButton } from "@mui/material";
-import { Delete } from "@mui/icons-material/";
+import { IconButton } from '@mui/material';
+import { Delete } from '@mui/icons-material/';
 
 interface DeleteButtonProps {
   handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
   dataTestid?: string;
 }
 
-export const DeleteButton = ({
-  handleDelete,
-  dataTestid,
-}: DeleteButtonProps) => {
+export const DeleteButton = ({ handleDelete, dataTestid }: DeleteButtonProps) => {
   return (
     <IconButton
       size="medium"

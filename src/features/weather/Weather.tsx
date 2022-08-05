@@ -1,13 +1,13 @@
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { CircularProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 import {
   capitalizeFirstLetter,
   deleteCityFromLocalStorage,
   getLocalStorageCities,
-} from "../../helpres/helpres";
-import { WeatherCard } from "./WeatherCard";
-import { WeatherSearchbar } from "./WeatherSearchbar";
+} from '../../helpres/helpres';
+import { WeatherCard } from './WeatherCard';
+import { WeatherSearchbar } from './WeatherSearchbar';
 import {
   selectCities,
   fetchCityByName,
@@ -15,16 +15,16 @@ import {
   setStatus,
   fetchSeveralByName,
   deleteByName,
-} from "./weatherSlice";
-import { ContentWrapper } from "../../components/layout/ContentWrapper";
-import { CenteredGrid } from "../../components/layout/CenteredGrid";
-import { Notification } from "../../components/notification/Notification";
+} from './weatherSlice';
+import { ContentWrapper } from '../../components/layout/ContentWrapper';
+import { CenteredGrid } from '../../components/layout/CenteredGrid';
+import { Notification } from '../../components/notification/Notification';
 
 export const Weather = () => {
   const cities = useAppSelector(selectCities);
   const status = useAppSelector(selectStatus);
   const dispatch = useAppDispatch();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     let savedCities = getLocalStorageCities();
@@ -43,11 +43,11 @@ export const Weather = () => {
       return;
     }
     dispatch(fetchCityByName(inputValue));
-    setInputValue("");
+    setInputValue('');
   };
 
   const handleCloseNotification = () => {
-    dispatch(setStatus("idle"));
+    dispatch(setStatus('idle'));
   };
 
   const handleDelete = (cityName: string) => {
@@ -83,15 +83,15 @@ export const Weather = () => {
           );
         })}
 
-        {status === "loading" && Object.keys(cities).length === 0 ? (
+        {status === 'loading' && Object.keys(cities).length === 0 ? (
           <CenteredGrid item xs={6} md={4}>
             <CircularProgress />
           </CenteredGrid>
         ) : null}
 
-        {status === "failed" ? (
+        {status === 'failed' ? (
           <Notification
-            open={status === "failed"}
+            open={status === 'failed'}
             onClose={handleCloseNotification}
             autoHideDuration={6000}
             severity="error"

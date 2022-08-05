@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { setLocalStorageCities } from "../../helpres/helpres";
-import { fetchByName } from "../../api/weatherAPI";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { setLocalStorageCities } from '../../helpres/helpres';
+import { fetchByName } from '../../api/weatherAPI';
 
-type StatusType = "idle" | "loading" | "failed";
+type StatusType = 'idle' | 'loading' | 'failed';
 
 export interface CityWeather {
   [name: string]: {
@@ -18,26 +18,23 @@ export interface CitiesWeatherState {
 }
 
 const initialState: CitiesWeatherState = {
-  status: "idle",
+  status: 'idle',
   cities: {},
 };
 
-export const fetchCityByName = createAsyncThunk(
-  "weather/fetchByName",
-  async (cityName: string) => {
-    const data = await fetchByName(cityName);
-    if (data) {
-      setLocalStorageCities(data.name);
-    }
-    const cityData: CityWeather = {
-      [data.name]: { temp: data.main.temp, id: data.id },
-    };
-    return cityData;
+export const fetchCityByName = createAsyncThunk('weather/fetchByName', async (cityName: string) => {
+  const data = await fetchByName(cityName);
+  if (data) {
+    setLocalStorageCities(data.name);
   }
-);
+  const cityData: CityWeather = {
+    [data.name]: { temp: data.main.temp, id: data.id },
+  };
+  return cityData;
+});
 
 export const fetchSeveralByName = createAsyncThunk(
-  "weather/fetchSeveralByName",
+  'weather/fetchSeveralByName',
   async (cityNames: string[]) => {
     let allCitiesData: CityWeather = {};
     await Promise.all(
@@ -51,7 +48,7 @@ export const fetchSeveralByName = createAsyncThunk(
 );
 
 export const weatherSlice = createSlice({
-  name: "weather",
+  name: 'weather',
   initialState,
   reducers: {
     setStatus: (state, action: PayloadAction<StatusType>) => {
@@ -64,24 +61,24 @@ export const weatherSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCityByName.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchCityByName.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = 'idle';
         state.cities = { ...state.cities, ...action.payload };
       })
       .addCase(fetchCityByName.rejected, (state) => {
-        state.status = "failed";
+        state.status = 'failed';
       })
       .addCase(fetchSeveralByName.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchSeveralByName.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = 'idle';
         state.cities = { ...state.cities, ...action.payload };
       })
       .addCase(fetchSeveralByName.rejected, (state) => {
-        state.status = "failed";
+        state.status = 'failed';
       });
   },
 });

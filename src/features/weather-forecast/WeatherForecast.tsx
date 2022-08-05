@@ -1,38 +1,38 @@
-import { Grid, styled, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { CenteredGrid } from "../../components/layout/CenteredGrid";
-import { ContentWrapper } from "../../components/layout/ContentWrapper";
-import { fetchForecast, selectForecast } from "./weatherForecastSlice";
+import { Grid, styled, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { CenteredGrid } from '../../components/layout/CenteredGrid';
+import { ContentWrapper } from '../../components/layout/ContentWrapper';
+import { fetchForecast, selectForecast } from './weatherForecastSlice';
 
 const TimeWrapper = styled(Grid)({
-  display: "flex",
-  justifyContent: "space-between",
-  borderLeft: "1px solid black",
-  borderRight: "1px solid black",
+  display: 'flex',
+  justifyContent: 'space-between',
+  borderLeft: '1px solid black',
+  borderRight: '1px solid black',
 }) as typeof Grid;
 
 const TempWrapper = styled(TimeWrapper)({
-  height: "200px",
+  height: '200px',
 }) as typeof Grid;
 
 const TimeCard = styled(Grid)({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "12.5%",
-  height: "50px",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '12.5%',
+  height: '50px',
 }) as typeof Grid;
 
 const TempCard = styled(TimeCard)({
-  position: "relative",
+  position: 'relative',
 }) as typeof Grid;
 
 const ForecastTitle = styled(Typography)({
-  display: "flex",
+  display: 'flex',
   fontSize: 40,
-  margin: "20px 0",
+  margin: '20px 0',
 }) as typeof Typography;
 
 export const WeatherForecast = () => {
@@ -67,9 +67,7 @@ export const WeatherForecast = () => {
             const tempDiff = maxTemp - temp;
             const greenVal = 20 + tempDiff * 15;
             const backgroundColor =
-              temp === 0
-                ? `rgb(255, 255, 255)`
-                : `rgba(255, ${greenVal}, 0, 0.25)`;
+              temp === 0 ? `rgb(255, 255, 255)` : `rgba(255, ${greenVal}, 0, 0.25)`;
             return (
               <TempCard
                 item
