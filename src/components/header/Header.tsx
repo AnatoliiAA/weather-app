@@ -33,7 +33,7 @@ export const Header = () => {
     <ContentWrapper>
       <HeaderContent container>
         <Grid item>
-          <CustomLink to="/">Home</CustomLink>
+          <CustomLink to="/weather-app">Home</CustomLink>
         </Grid>
       </HeaderContent>
     </ContentWrapper>

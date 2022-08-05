@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Weather />} />
+          <Route path="/weather-app" element={<Weather />} />
           <Route path="/forecast/:cityName" element={<WeatherForecast />} />
         </Routes>
       </Router>
