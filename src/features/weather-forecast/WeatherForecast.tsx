@@ -42,7 +42,7 @@ export const WeatherForecast = () => {
 
   useEffect(() => {
     dispatch(fetchForecast(cityName));
-  }, []);
+  }, [cityName, dispatch]);
 
   const maxTemp = Math.max(...Object.values(forecast));
 

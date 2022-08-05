@@ -31,7 +31,7 @@ export const Weather = () => {
     if (savedCities.length) {
       dispatch(fetchSeveralByName(savedCities));
     }
-  }, []);
+  }, [dispatch]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const capitalizedInput = capitalizeFirstLetter(e.target.value);

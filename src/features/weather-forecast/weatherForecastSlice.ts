@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { fetchForecastByName } from '../../api/weatherAPI';
 
@@ -22,7 +22,6 @@ export const fetchForecast = createAsyncThunk(
   'weather/fetchForecastByName',
   async (cityName: string) => {
     const data = await fetchForecastByName(cityName);
-    console.log(data);
     const forecast: Forecast = {};
     data.list.forEach((element: any) => {
       const date = new Date(element.dt_txt);
