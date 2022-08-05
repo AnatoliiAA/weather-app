@@ -1,17 +1,6 @@
 import { TextField, Button, Grid } from "@mui/material";
 import React from "react";
-import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-
-// const SearchBarWrapper = styled(Box)({
-//   display: "flex",
-//   justifyContent: "space-between",
-//   width: "100%",
-// }) as typeof Box;
-
-// const CustomTextField = styled(TextField)({
-//   width: "80%",
-// }) as typeof TextField;
 
 const CustomButton = styled(Button)({
   width: "100%",
@@ -39,10 +28,15 @@ export const WeatherSearchbar = ({
           variant="outlined"
           value={value}
           onChange={handleInput}
+          inputProps={{ "data-testid": "searchbar" }}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
-        <CustomButton variant="outlined" onClick={handleSearch}>
+        <CustomButton
+          variant="outlined"
+          onClick={handleSearch}
+          data-testid="search-button"
+        >
           Search
         </CustomButton>
       </Grid>

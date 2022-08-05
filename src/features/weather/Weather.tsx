@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { Alert, CircularProgress, Snackbar } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   capitalizeFirstLetter,
@@ -42,8 +42,8 @@ export const Weather = () => {
     if (!inputValue) {
       return;
     }
-    setInputValue("");
     dispatch(fetchCityByName(inputValue));
+    setInputValue("");
   };
 
   const handleCloseNotification = () => {
@@ -60,7 +60,7 @@ export const Weather = () => {
   };
 
   return (
-    <ContentWrapper>
+    <ContentWrapper data-testid="weather-component">
       <CenteredGrid container spacing={2}>
         <CenteredGrid item xs={12}>
           <WeatherSearchbar

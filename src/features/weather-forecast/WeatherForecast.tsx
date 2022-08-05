@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { CenteredGrid } from "../../components/layout/CenteredGrid";
 import { ContentWrapper } from "../../components/layout/ContentWrapper";
-import { fetchForecast, selectCitiesForecast } from "./weatherForecastSlice";
+import { fetchForecast, selectForecast } from "./weatherForecastSlice";
 
 const TimeWrapper = styled(Grid)({
   display: "flex",
@@ -36,50 +36,54 @@ const ForecastTitle = styled(Typography)({
 }) as typeof Typography;
 
 export const WeatherForecast = () => {
-  const cities = useAppSelector(selectCitiesForecast);
+  const forecast = useAppSelector(selectForecast);
   const { cityName } = useParams() as { cityName: string };
   const dispatch = useAppDispatch();
-  let maxTemp =
-    cityName in cities ? Math.max(...Object.values(cities[cityName])) : 0;
 
   useEffect(() => {
     dispatch(fetchForecast(cityName));
   }, []);
 
+  const maxTemp = Math.max(...Object.values(forecast));
+
   return (
-    <ContentWrapper>
+    <ContentWrapper data-testid="weather-forecast-component">
       <CenteredGrid container>
         <Grid item xs={12} display="flex" justifyContent="center">
-          <ForecastTitle>{cityName} Weather Forecast</ForecastTitle>
+          <ForecastTitle>{cityName} 24 hour Weather Forecast</ForecastTitle>
         </Grid>
         <TimeWrapper item container xs={12}>
-          {Object.keys(cityName in cities ? cities[cityName] : []).map(
-            (time) => {
-              return <TimeCard item>{time}:00</TimeCard>;
-            }
-          )}
+          {Object.keys(forecast).map((time) => {
+            return (
+              <TimeCard item key={time}>
+                {time}
+              </TimeCard>
+            );
+          })}
         </TimeWrapper>
 
         <TempWrapper item container xs={12}>
-          {Object.values(cityName in cities ? cities[cityName] : []).map(
-            (temp) => {
-              const tempDiff = maxTemp - temp;
-              const greenVal = 20 + tempDiff * 15;
-              return (
-                <TempCard
-                  item
-                  sx={{
-                    top: `${tempDiff * 5}px`,
-                    backgroundColor: `rgba(255, ${greenVal}, 0, 0.25)`,
-                    borderBottom: `1px solid rgb(255, ${greenVal}, 0)`,
-                  }}
-                >
-                  {temp >= 0 ? "+" : "-"}
-                  {temp}
-                </TempCard>
-              );
-            }
-          )}
+          {Object.values(forecast).map((temp, id) => {
+            const tempDiff = maxTemp - temp;
+            const greenVal = 20 + tempDiff * 15;
+            const backgroundColor =
+              temp === 0
+                ? `rgb(255, 255, 255)`
+                : `rgba(255, ${greenVal}, 0, 0.25)`;
+            return (
+              <TempCard
+                item
+                sx={{
+                  top: `${tempDiff * 5}px`,
+                  backgroundColor: backgroundColor,
+                  borderBottom: `1px solid rgb(255, ${greenVal}, 0)`,
+                }}
+                key={id}
+              >
+                {temp >= 0 ? `+${temp}` : temp}
+              </TempCard>
+            );
+          })}
         </TempWrapper>
       </CenteredGrid>
     </ContentWrapper>

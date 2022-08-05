@@ -8,25 +8,28 @@ type Forecast = { [name: string]: number };
 
 export interface CitiesWeatherState {
   status: StatusType;
-  citiesForecast: { [name: string]: Forecast };
+  forecast: Forecast;
 }
 
 const initialState: CitiesWeatherState = {
   status: "idle",
-  citiesForecast: {},
+  forecast: {
+    time: 0,
+  },
 };
 
 export const fetchForecast = createAsyncThunk(
-  "weather/fetchForecast",
+  "weather/fetchForecastByName",
   async (cityName: string) => {
     const data = await fetchForecastByName(cityName);
+    console.log(data);
     const forecast: Forecast = {};
     data.list.forEach((element: any) => {
       const date = new Date(element.dt_txt);
-      const hours = date.getHours();
+      const hours = `${date.getHours()}:00`;
       forecast[hours] = element.main.temp;
     });
-    return { name: cityName, forecast: forecast };
+    return forecast;
   }
 );
 
@@ -41,7 +44,7 @@ export const weatherForecastSlice = createSlice({
       })
       .addCase(fetchForecast.fulfilled, (state, action) => {
         state.status = "idle";
-        state.citiesForecast[action.payload.name] = action.payload.forecast;
+        state.forecast = { ...action.payload };
       })
       .addCase(fetchForecast.rejected, (state) => {
         state.status = "failed";
@@ -49,7 +52,8 @@ export const weatherForecastSlice = createSlice({
   },
 });
 
-export const selectCitiesForecast = (state: RootState) => state.weatherForecast.citiesForecast;
-export const selectStatus = (state: RootState) => state.weather.status;
+export const selectForecast = (state: RootState) =>
+  state.weatherForecast.forecast;
+export const selectStatus = (state: RootState) => state.weatherForecast.status;
 
 export default weatherForecastSlice.reducer;

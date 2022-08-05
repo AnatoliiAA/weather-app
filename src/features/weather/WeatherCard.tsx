@@ -29,7 +29,7 @@ export const WeatherCard = ({
   title,
   temp,
   handleDelete,
-  handleUpdate
+  handleUpdate,
 }: WeatherCardProps) => {
   const navigate = useNavigate();
 
@@ -38,21 +38,38 @@ export const WeatherCard = ({
   };
 
   return (
-    <CustomCard>
+    <CustomCard data-testid={`card-${title}`}>
       <CardHeader
         title={title}
-        action={<DeleteButton handleDelete={handleDelete} />}
+        action={
+          <DeleteButton
+            handleDelete={handleDelete}
+            dataTestid={`delete-button-${title}`}
+          />
+        }
       />
       <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary">
-          {temp > 0 ? `+${temp}` : `-${temp}`}
+        <Typography
+          sx={{ fontSize: 18 }}
+          color="text.secondary"
+          data-testid={`temp-${title}`}
+        >
+          {temp > 0 ? `+${temp}` : temp}
         </Typography>
       </CardContent>
-      <CardActions sx={{justifyContent: "space-between"}}>
-        <Button size="small" variant="outlined" onClick={handleShowForecast}>
+      <CardActions sx={{ justifyContent: "space-between" }}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={handleShowForecast}
+          data-testid={`forecast-button-${title}`}
+        >
           Show Forecast
         </Button>
-        <UpdateButton handleUpdate={handleUpdate}/>
+        <UpdateButton
+          handleUpdate={handleUpdate}
+          dataTestid={`update-button-${title}`}
+        />
       </CardActions>
     </CustomCard>
   );

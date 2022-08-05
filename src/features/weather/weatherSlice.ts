@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { setLocalStorageCities } from "../../helpres/helpres";
-import { fetchByName, fetchForecastByName } from "../../api/weatherAPI";
+import { fetchByName } from "../../api/weatherAPI";
 
 type StatusType = "idle" | "loading" | "failed";
-
-type Forecast = { [name: string]: number };
 
 export interface CityWeather {
   [name: string]: {

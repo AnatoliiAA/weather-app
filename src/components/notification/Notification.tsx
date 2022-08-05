@@ -1,5 +1,5 @@
 import { Alert, Snackbar } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { CloseButton } from "../action-buttons/CloseButton";
 
 interface NotificationProps {
   onClose: (event: React.SyntheticEvent<any> | Event, reason?: string) => void;
@@ -19,9 +19,12 @@ export const Notification = ({
   return (
     <Snackbar open={open} onClose={onClose} autoHideDuration={autoHideDuration}>
       <Alert
-        onClose={(e) => onClose(e)}
+        action={
+          <CloseButton handleClose={onClose} dataTestid="notification-close" />
+        }
         severity={severity}
         sx={{ width: "100%" }}
+        data-testid={"notification"}
       >
         {text}
       </Alert>
