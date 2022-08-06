@@ -1,9 +1,9 @@
 import React from 'react';
 import { waitFor, getByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { WeatherSearchbar } from './WeatherSearchbar';
+import { WeatherSearchbar } from '../WeatherSearchbar';
 import userEvent from '@testing-library/user-event';
-import { renderWithProviders } from '../../utils/test-utils';
+import { renderWithProviders } from '../../../utils/test-utils';
 
 describe('WeatherSearchbar component tests', () => {
   describe('Render test', () => {

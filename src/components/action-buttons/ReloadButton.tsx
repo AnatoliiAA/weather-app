@@ -1,5 +1,5 @@
 import { IconButton } from '@mui/material';
-import { Update } from '@mui/icons-material/';
+import { Refresh } from '@mui/icons-material/';
 
 interface UpdateButtonProps {
   handleUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -15,7 +15,7 @@ export const UpdateButton = ({ handleUpdate, dataTestid }: UpdateButtonProps) =>
       onClick={handleUpdate}
       data-testid={dataTestid}
     >
-      <Update fontSize="medium" />
+      <Refresh fontSize="medium" color="primary" />
     </IconButton>
   );
 };

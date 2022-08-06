@@ -1,5 +1,5 @@
 import { IconButton } from '@mui/material';
-import { Delete } from '@mui/icons-material/';
+import { DeleteOutline } from '@mui/icons-material/';
 
 interface DeleteButtonProps {
   handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -15,7 +15,7 @@ export const DeleteButton = ({ handleDelete, dataTestid }: DeleteButtonProps) =>
       onClick={handleDelete}
       data-testid={dataTestid}
     >
-      <Delete fontSize="medium" />
+      <DeleteOutline fontSize="medium" color="primary" />
     </IconButton>
   );
 };

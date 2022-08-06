@@ -4,7 +4,9 @@ import { fetchForecastByName } from '../../api/weatherAPI';
 
 type StatusType = 'idle' | 'loading' | 'failed';
 
-type Forecast = { [name: string]: number };
+type Forecast = {
+  [time: string]: { temp: number; weatherIcon: string; weatherDescr: string; windSpeed: number };
+};
 
 export interface CitiesWeatherState {
   status: StatusType;
@@ -13,9 +15,7 @@ export interface CitiesWeatherState {
 
 const initialState: CitiesWeatherState = {
   status: 'idle',
-  forecast: {
-    time: 0,
-  },
+  forecast: {},
 };
 
 export const fetchForecast = createAsyncThunk(
@@ -26,7 +26,12 @@ export const fetchForecast = createAsyncThunk(
     data.list.forEach((element: any) => {
       const date = new Date(element.dt_txt);
       const hours = `${date.getHours()}:00`;
-      forecast[hours] = element.main.temp;
+      forecast[hours] = {
+        temp: Math.round(element.main.temp),
+        weatherIcon: element.weather[0].icon,
+        weatherDescr: element.weather[0].description,
+        windSpeed: element.wind.speed,
+      };
     });
     return forecast;
   }

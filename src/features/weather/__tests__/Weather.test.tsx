@@ -1,22 +1,17 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import {
-  waitFor,
-  getByTestId,
-  fireEvent,
-  findByText,
-  findByTestId,
-} from '@testing-library/react';
+import { waitFor, getByTestId, fireEvent, findByText, findByTestId } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Weather } from './Weather';
+import { Weather } from '../Weather';
 import userEvent from '@testing-library/user-event';
-import { renderWithProviders } from '../../utils/test-utils';
+import { renderWithProviders } from '../../../utils/test-utils';
+import { fetchByNameRes } from './mockedRequest.json';
 
 export const handlers = [
   rest.get('https://api.openweathermap.org/*', (req, res, ctx) => {
     const cityName = req.url.searchParams.get('q');
-    return res(ctx.status(200), ctx.json({ name: cityName, id: 1, main: { temp: 20 } }));
+    return res(ctx.status(200), ctx.json({ ...fetchByNameRes, name: cityName }));
   }),
 ];
 

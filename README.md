@@ -1,8 +1,8 @@
 # Simple Weather App
 
 This App was created using create-react-app with redux-typescript template. \
-The app is hosted here [https://anatoliiaa.github.io/weather-app] (https://anatoliiaa.github.io/weather-app) \
-Feel free to check it out
+The app is hosted here [https://anatoliiaa.github.io/weather-app](https://anatoliiaa.github.io/weather-app) \
+Feel free to check it out :)
 
 ## Requirements:
 

@@ -8,6 +8,8 @@ type StatusType = 'idle' | 'loading' | 'failed';
 export interface CityWeather {
   [name: string]: {
     temp: number;
+    weatherIcon: string;
+    weatherDescr: string;
     id: number;
   };
 }
@@ -28,7 +30,12 @@ export const fetchCityByName = createAsyncThunk('weather/fetchByName', async (ci
     setLocalStorageCities(data.name);
   }
   const cityData: CityWeather = {
-    [data.name]: { temp: data.main.temp, id: data.id },
+    [data.name]: {
+      temp: Math.round(data.main.temp),
+      weatherIcon: data.weather[0].icon,
+      weatherDescr: data.weather[0].description,
+      id: data.id,
+    },
   };
   return cityData;
 });
@@ -40,7 +47,12 @@ export const fetchSeveralByName = createAsyncThunk(
     await Promise.all(
       cityNames.map(async (cityName) => {
         const data = await fetchByName(cityName);
-        allCitiesData[cityName] = { temp: data.main.temp, id: data.id };
+        allCitiesData[cityName] = {
+          temp: Math.round(data.main.temp),
+          weatherIcon: data.weather[0].icon,
+          weatherDescr: data.weather[0].description,
+          id: data.id,
+        };
       })
     );
     return allCitiesData;

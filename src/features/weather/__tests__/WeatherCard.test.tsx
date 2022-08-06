@@ -1,9 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { waitFor, getByTestId } from '@testing-library/react';
-import { WeatherCard } from './WeatherCard';
+import { WeatherCard } from '../WeatherCard';
 import userEvent from '@testing-library/user-event';
-import { renderWithProviders } from '../../utils/test-utils';
+import { renderWithProviders } from '../../../utils/test-utils';
 
 const mockedUsedNavigate = jest.fn();
 

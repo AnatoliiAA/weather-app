@@ -76,6 +76,8 @@ export const Weather = () => {
               <WeatherCard
                 title={city}
                 temp={cities[city].temp}
+                weatherIcon={cities[city].weatherIcon}
+                weatherDescr={cities[city].weatherDescr}
                 handleDelete={() => handleDelete(city)}
                 handleUpdate={() => handleUpdate(city)}
               ></WeatherCard>
