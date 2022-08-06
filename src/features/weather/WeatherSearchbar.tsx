@@ -10,10 +10,16 @@ const CustomButton = styled(Button)({
 interface WeatherSearchbarProps {
   value: string;
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSearch: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSearch: () => void;
 }
 
 export const WeatherSearchbar = ({ value, handleInput, handleSearch }: WeatherSearchbarProps) => {
+  const handleSearchOnEnter = (e: any) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={10}>
@@ -24,6 +30,7 @@ export const WeatherSearchbar = ({ value, handleInput, handleSearch }: WeatherSe
           variant="outlined"
           value={value}
           onChange={handleInput}
+          onKeyDown={handleSearchOnEnter}
           inputProps={{ 'data-testid': 'searchbar' }}
         />
       </Grid>
