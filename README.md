@@ -2,7 +2,9 @@
 
 This App was created using create-react-app with redux-typescript template. \
 The app is hosted here [https://anatoliiaa.github.io/weather-app](https://anatoliiaa.github.io/weather-app) \
-Feel free to check it out :)
+Feel free to check it out :)\
+My impressions of working on this project:\
+*I really enjoyed working on this project. It was the first time I worked with material UI. I like the styled component approach, but I found it a bit strange to create styled components in the main component file. I rather like the approach where styled components are created in a separate file such as ComponentName.css.tsx. In any case, it was an interesting experience and I really enjoyed it.*
 
 ## Requirements:
 
