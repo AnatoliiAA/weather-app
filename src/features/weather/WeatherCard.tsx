@@ -43,7 +43,7 @@ export const WeatherCard = ({
   const navigate = useNavigate();
 
   const handleShowForecast = () => {
-    navigate(`/forecast/${title}`);
+    navigate(`/weather-app/forecast/${title}`, { replace: true });
   };
 
   return (
